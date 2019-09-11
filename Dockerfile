@@ -6,12 +6,19 @@ RUN  apt-get update \
     python \
   && rm -rf /var/lib/apt/lists/* /tmp/*
 
-# NativeScript suggests:
-# --filter tools,platform-tools,android-23,build-tools-23.0.2,extra-android-m2repository,extra-google-m2repository,extra-android-support --all --no-ui
-
 # Setup maven repo to satisfy tns doctor.
-RUN (yes | $ANDROID_HOME/tools/android update sdk --no-ui \
-  --filter extra-android-m2repository,extra-google-m2repository) >/dev/null
+#   'emulator' \
+RUN \
+  (yes | ${ANDROID_HOME}/tools/bin/sdkmanager --update) && \
+  /usr/local/android-sdk-linux/tools/bin/sdkmanager --list && \
+  (yes | ${ANDROID_HOME}/tools/bin/sdkmanager \
+    'tools' \
+    'platform-tools' \
+    'platforms;android-28' \
+    'build-tools;28.0.3' \
+    'extras;android;m2repository' \
+    'extras;google;m2repository' \
+  ) > /dev/null
 
 RUN npm install -g nativescript --unsafe-perm
 
