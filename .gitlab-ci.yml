@@ -1,0 +1,9 @@
+image: docker
+
+build:
+  before_script:
+    - docker login -u gitlab-ci-token -p ${CI_BUILD_TOKEN} ${CI_REGISTRY}
+  script:
+  - docker build --no-cache -t "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}" .
+  - docker run "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}" /bin/sh -c "echo | tns doctor"
+  - docker push "${CI_REGISTRY_IMAGE}:${CI_BUILD_REF_NAME}"

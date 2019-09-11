@@ -1,6 +1,4 @@
-FROM beevelop/android-nodejs:latest
-MAINTAINER Randy Stauner <randy@magnificent-tears.com>
-
+FROM gitlab.k-net.fr:1234/tel/docker.android
 RUN  apt-get update \
   && apt-get install -y \
     g++ \
