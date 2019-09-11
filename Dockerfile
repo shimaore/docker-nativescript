@@ -1,4 +1,4 @@
-FROM gitlab.k-net.fr:1234/tel/docker.android
+FROM gitlab.k-net.fr:1234/tel/docker.android:master
 RUN  apt-get update \
   && apt-get install -y \
     g++ \
