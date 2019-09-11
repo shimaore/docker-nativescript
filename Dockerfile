@@ -10,8 +10,8 @@ RUN  apt-get update \
 # --filter tools,platform-tools,android-23,build-tools-23.0.2,extra-android-m2repository,extra-google-m2repository,extra-android-support --all --no-ui
 
 # Setup maven repo to satisfy tns doctor.
-RUN echo y | $ANDROID_HOME/tools/android update sdk --no-ui \
-  --filter extra-android-m2repository,extra-google-m2repository
+RUN (yes | $ANDROID_HOME/tools/android update sdk --no-ui \
+  --filter extra-android-m2repository,extra-google-m2repository) >/dev/null
 
 RUN npm install -g nativescript --unsafe-perm
 
